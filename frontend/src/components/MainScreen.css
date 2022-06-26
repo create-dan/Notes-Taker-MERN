@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Nunito:wght@900&display=swap');
+
+.mainback {
+    height: 83 vh;
+    display: flex;
+    padding: 10px 0;
+
+}
+
+.page{
+    width: 100%;
+}
+
+.heading{
+    font-size: 60px;
+    padding: 5px 10px;
+    font-family: 'Nunito', sans-serif;
+}
+
+@media only screen and (max-width:600px) {
+    .heading{
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+}
