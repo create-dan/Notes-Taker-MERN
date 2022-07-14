@@ -6,7 +6,6 @@ import MainScreen from "../../components/MainScreen";
 import "./MyNotes.css";
 import axios from "axios";
 const MyNotes = () => {
-
   const [notes, setNotes] = useState([]);
   const deleteHandler = (id) => {
     // if (window.confirm("Are you Sure")) {
@@ -15,8 +14,9 @@ const MyNotes = () => {
   };
 
   const fetchNotes = async () => {
-    const {data} = await axios.get("http://localhost:5000/api/notes");
+    const { data } = await axios.get("/api/notes");
     // console.log("data is here", data);
+    console.log(data);
     setNotes(data);
   };
 
@@ -28,7 +28,7 @@ const MyNotes = () => {
 
   return (
     <div>
-      <MainScreen title="duniya goal hai">
+      <MainScreen title="Welcome Back Dnyaneshwar Shinde ">
         <Link to="createnote">
           <Button style={{ marginLeft: 10, marginRight: 6 }} size="lg">
             Create New Note
@@ -36,7 +36,7 @@ const MyNotes = () => {
         </Link>
 
         {notes.map((note) => (
-          <Accordion key='note._id'>
+          <Accordion key="note._id">
             <Accordion.Item eventKey="0">
               <Card style={{ margin: 10 }}>
                 <Card.Header style={{ display: "flex" }}>

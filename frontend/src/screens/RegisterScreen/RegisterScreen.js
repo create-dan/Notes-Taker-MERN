@@ -1,7 +1,8 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../actions/userActions";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading/Loading";
 import MainScreen from "../../components/MainScreen";
@@ -17,43 +18,24 @@ const RegisterScreen = () => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  const [problem, setProblem] = useState(false);
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/mynotes");
+    }
+  }, [navigate, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // console.log(email);
-
     if (password !== confirmpassword) {
-      setMessage("Password do not match");
+      setMessage("Password do not match !");
     } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-
-        setLoading(true);
-        const { data } = await axios.post(
-          "http://localhost:5000/api/users",
-          {
-            name,
-            pic,
-            email,
-            password,
-          },
-          config
-        );
-
-        setLoading(false);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        console.log(data);
-      } catch (error) {
-        setProblem(error.message);
-      }
+      dispatch(register(name, email, password, pic));
     }
   };
 
@@ -63,13 +45,27 @@ const RegisterScreen = () => {
     }
 
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
-
       const data = new FormData();
-      data.append('file', pics);
-      data.append('upload_preset', note_maker);
-      data.append('cloud_name',dnyaneshwar);
+      data.append("file", pics);
+      data.append("api_key", "314382189381167");
+      data.append("upload_preset", "note_maker");
+      data.append("cloud_name", "dnyaneshwar0");
 
-      fetch('')
+      // fetch(
+      //   "CLOUDINARY_URL=cloudinary://314382189381167:COVcBFQSBnm6D3GR7SZckbQMGrU@dnyaneshwar0"
+      // );
+
+      fetch("https://api.cloudinary.com/v1_1/dnyaneshwar0/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          setPic(data.url);
+        });
+    } else {
+      return setPicMessage("Please Select an Image");
     }
 
     setPicMessage(null);
@@ -78,7 +74,7 @@ const RegisterScreen = () => {
     <>
       <MainScreen title="REGISTER">
         <div className="loginContainer">
-          {problem && <ErrorMessage variant="danger">{problem} </ErrorMessage>}
+          {error && <ErrorMessage variant="danger">{error} </ErrorMessage>}
           {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
           {loading && <Loading />}
           <Form onSubmit={submitHandler}>
@@ -122,21 +118,34 @@ const RegisterScreen = () => {
               />
             </Form.Group>
 
-            {/* <Form.Group controlId="pic">
+            {picMessage && (
+              <ErrorMessage variant="danger">{picMessage} </ErrorMessage>
+            )}
+
+            {/* <Form.Group controlId="pic" className="mb-3">
               <Form.Label>Profile Picture</Form.Label>
-              <Form.File
-                // onChange={(e) => postDetails(e.target.files[0])}
-                id="custom-file"
+              <Form.Control
+                type="file"
+                size="lg"
+                onChange={(e) => postDetails(e.target.files[0])}
+                id
+      
+              />
+            </Form.Group> */}
+            <Form.Group controlId="pic">
+              <Form.Label>Profile Picture</Form.Label>
+              <Form.Control
+                onChange={(e) => postDetails(e.target.files[0])}
                 type="file"
                 label="Upload Profile Picture"
                 custom
-              ></Form.File>
-            </Form.Group> */}
-
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Profile Picture</Form.Label>
-              <Form.Control type="file" />
+              />
             </Form.Group>
+            {/* 
+            <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>Profile Picture</Form.Label>
+                <Form.Control type="file" />
+              </Form.Group>  */}
 
             <Button variant="primary" type="submit">
               Register

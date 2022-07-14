@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const matchPassword = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
-const registerUser = async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, pic } = req.body;
 
   const userExists = await User.findOne({ email });
@@ -30,9 +30,9 @@ const registerUser = async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Errro("Error Occured");
+    throw new Error("Error Occured");
   }
-};
+});
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -47,7 +47,6 @@ const authUser = asyncHandler(async (req, res) => {
       pic: user.pic,
       token: generateToken(user._id),
     });
-    
   } else {
     res.status(400);
     res.json("Invalid Email");
