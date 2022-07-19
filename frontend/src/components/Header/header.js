@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,25 +39,35 @@ const Header = () => {
                   type="text"
                   placeholder="search"
                   className="mr-sm-2"
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </Form>
             </Nav>
-            <Nav>
-              <Nav.Link>
-                <Link to="/mynotes">My Notes</Link>
-              </Nav.Link>
+            {userInfo ? (
+              <Nav>
+                <Nav.Link>
+                  <Link to="/mynotes">My Notes</Link>
+                </Nav.Link>
 
-              <NavDropdown title="Dnyaneshwar Shinde" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  My Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Log Out
-                </NavDropdown.Item>
+                <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile">
+                    My Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Log Out
+                  </NavDropdown.Item>
 
-                <NavDropdown.Divider />
-              </NavDropdown>
-            </Nav>
+                  <NavDropdown.Divider />
+                </NavDropdown>
+              </Nav>
+            ) : (
+              <Nav>
+                {" "}
+                <Nav.Link>
+                  <Link to="/login">Log In</Link>
+                </Nav.Link>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
