@@ -12,6 +12,7 @@ fronted/node_modules/
 
 # production
 /build
+/fronted/build
 
 # misc
 .DS_Store

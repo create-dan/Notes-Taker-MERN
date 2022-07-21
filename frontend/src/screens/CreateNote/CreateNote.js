@@ -20,7 +20,7 @@ function CreateNote({ history }) {
   const { loading, error, note } = noteCreate;
 
   console.log(note);
- 
+
   const resetHandler = () => {
     setTitle("");
     setCategory("");
@@ -29,7 +29,7 @@ function CreateNote({ history }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!title || !content || !category) return; 
+    if (!title || !content || !category) return;
     dispatch(createNoteAction(title, content, category));
 
     resetHandler();
@@ -84,7 +84,12 @@ function CreateNote({ history }) {
               />
             </Form.Group>
             {loading && <Loading size={50} />}
-            <Button type="submit" variant="primary">
+
+            <Button
+              type="submit"
+              variant="primary"
+              
+            >
               Create Note
             </Button>
             <Button className="mx-2" onClick={resetHandler} variant="danger">
