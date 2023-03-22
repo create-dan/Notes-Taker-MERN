@@ -2,6 +2,19 @@
 
 "Note Keeper" is a full-stack web application developed using MERN stack that allows users to manage their notes effortlessly. With this application, users can create, update, read and delete their notes with just a few clicks.
 
+<p align="center">
+<img src="screenshots/n1.jpeg" height="440">
+</p>
+<p align="center">
+<img src="ScreenShots/n2.jpeg" height="440">
+</p>
+<p align="center">
+<img src="ScreenShots/n3.jpeg" height="440">
+</p>
+<p align="center">
+<img src="ScreenShots/n4.jpeg" height="440">
+</p>
+
 
 
 
@@ -32,18 +45,7 @@
 ## All Sections
 
 
-<p align="center">
-<img src="ScreenShots/n1.jpeg" height="440">
-</p>
-<p align="center">
-<img src="ScreenShots/n2.jpeg" height="440">
-</p>
-<p align="center">
-<img src="ScreenShots/n3.jpeg" height="440">
-</p>
-<p align="center">
-<img src="ScreenShots/n4.jpeg" height="440">
-</p>
+
 
 
 
