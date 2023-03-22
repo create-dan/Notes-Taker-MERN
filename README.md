@@ -5,14 +5,21 @@
 <p align="center">
 <img src="screenshots/n1.jpeg" height="440">
 </p>
+
+
+
 <p align="center">
-<img src="ScreenShots/n2.jpeg" height="440">
+<img src="screenshots/n2.jpeg" height="440">
 </p>
+
+
 <p align="center">
-<img src="ScreenShots/n3.jpeg" height="440">
+<img src="screenshots/n3.jpeg" height="440">
 </p>
+
+
 <p align="center">
-<img src="ScreenShots/n4.jpeg" height="440">
+<img src="screenshots/n4.jpeg" height="440">
 </p>
 
 
