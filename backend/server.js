@@ -14,9 +14,9 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-// app.get("/api/notes", (req, res) => {
-//   res.send(notes);
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to website");
+ });
 
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
