@@ -11,7 +11,7 @@ const createNote = asyncHandler(async (req, res) => {
   const { title, content, category } = req.body;
   if (!title || !content || !category) {
     res.status(400);
-    throw new Error("Please Fill All the Fields");
+    
   } else {
     const note = new Note({ user: req.user._id, title, content, category });
     const createdNote = await note.save();

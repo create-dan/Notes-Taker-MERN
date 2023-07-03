@@ -9,8 +9,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400).json("user already exists");
-    throw new Error("User already Exists");
-    
+    // throw new Error("User already Exists");
   }
 
   const user = await User.create({
@@ -21,6 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -76,7 +76,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error("User Not Found");
-    
   }
 });
 module.exports = { registerUser, authUser, updateUserProfile };
