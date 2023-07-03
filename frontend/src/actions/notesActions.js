@@ -1,3 +1,4 @@
+import {url} from "../Url/url";
 import {
   NOTES_CREATE_FAIL,
   NOTES_CREATE_REQUEST,
@@ -30,7 +31,7 @@ export const listNotes = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/notes`, config);
+    const { data } = await axios.get(`${url}/api/notes`, config);
 
     dispatch({
       type: NOTES_LIST_SUCCESS,
@@ -67,7 +68,7 @@ export const createNoteAction =
       };
 
       const { data } = await axios.post(
-        `/api/notes/create`,
+        `${url}/api/notes/create`,
         { title, content, category },
         config
       );
@@ -107,7 +108,7 @@ export const updateNoteAction =
       };
 
       const { data } = await axios.put(
-        `/api/notes/${id}`,
+        `${url}/api/notes/${id}`,
         { title, content, category },
         config
       );
@@ -144,7 +145,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/notes/${id}`, config);
+    const { data } = await axios.delete(`${url}/api/notes/${id}`, config);
 
     dispatch({
       type: NOTES_DELETE_SUCCESS,
